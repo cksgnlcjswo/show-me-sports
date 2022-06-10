@@ -1,18 +1,14 @@
-import express from 'express'
+import express from 'express';
 import {registerWithEureka} from './eureka.js';
+import sportRouter from './crawler.js';
 
 const app = express();
+
+app.use(express.json());
+app.use('/',sportRouter);
 
 const server = app.listen(0,()=>{
     console.log("sport-service is running on port ",server.address().port);
 });
 
-app.get('/', (req,res,next) => {
-    res.send("hellw wolrd!");
-});
-
-app.get('/health_check', (req,res,next) => {
-    res.send("status good");
-});
-
-registerWithEureka('sports-service',server.address.port);
+registerWithEureka('sport-service',server.address().port);
