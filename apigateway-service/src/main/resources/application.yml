@@ -26,3 +26,10 @@ spring:
             - Path=/sport-service/**
           filters:
             - RewritePath=/sport-service/(?<segment>.*),/$\{segment}
+
+        - id: mail-service
+          uri: lb://mail-service
+          predicates:
+            - Path=/mail-service/**
+          filters:
+            - RewritePath=/mail-service/(?<segment>.*),/$\{segment}
